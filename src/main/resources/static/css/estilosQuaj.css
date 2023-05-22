@@ -1,0 +1,285 @@
+/*nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #6563FF;
+    height: 70px;
+    padding: 0 20px;
+  }
+  
+
+  .menu {
+    display: flex;
+    list-style-type: none;
+  }
+  
+  .menu li {
+    margin-right: 20px;
+  }
+  
+  .menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .menu a {
+    color: black;
+    text-decoration: none;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }*/
+
+  /*banner black friday animacio{on*/
+  .banner {
+  background-image: url("fondo_banner.jpg");
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+  .banner {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-weight: bold;
+  }
+
+  .animated-text {
+    position: absolute;
+    top: 20%;
+    left: 30px;
+    
+  }
+  
+  @keyframes slidein {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(700%);
+    }
+  }
+
+  .animated-text {
+    animation: slidein 15s infinite linear;
+  }
+  /*banner black friday animacio{on*/
+    
+.footerContent{
+
+  background-color: #6563FF;
+}
+.container-fluid{
+    background-color: #6563FF;
+    
+}
+
+.container-fluid .navbar-nav{
+  
+ 
+}
+
+  form {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    background-color: white;
+    width: 700px;
+    height: 500px;
+    border-radius: 8px;
+    padding: 30px 40px;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+  }
+  
+  label {
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+  
+  input, button {
+    display: block;
+    width: 100%;
+    padding: 5px;
+  }
+  
+  .btn {
+    grid-column: 1 / -1;
+    text-align: center;
+  }
+  .formulario-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }  
+
+  #formulario-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  
+  }
+  .formulario-container {
+    position: relative;
+    top: -100px;
+    transition: all 2s ease-in-out;
+  }
+
+
+.formulario-container.active {
+  top: 0;
+}
+
+/*slider*/
+
+.carousel-inner{
+    background-image: url("https://vansco.vteximg.com.br/arquivos/ids/288617/BANNER-DESKTOP%20(17).gif?v=638125184798700000");
+    background-size: cover;
+    background-position: center;
+ 
+  
+}
+
+  @keyframes show-up {
+    0% { 
+      opacity: 0;
+      left: -2000px;
+    }
+    
+    100% {
+      opacity: 1;
+      left: 0px;
+    }
+  }
+
+  .btn {
+    background-color: #6563FF;
+    border:#6563FF;
+    width: 100%;
+    height: auto;
+    transition: transform 2s;
+}
+
+.btn:hover {
+    background-color: #4e4db0;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.container-fluid {
+  position: relative;
+}
+
+#imagen {
+  width: 10%;
+  height: auto;
+  transition: transform 1s;
+}
+
+#imagen:hover {
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+.navbar-brand{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.moveNavBar{
+  position: relative;
+  animation-name: moveNavBar;
+   animation-duration: 3s;
+   animation-fill-mode: forwards;
+}
+@keyframes moveNavBar {
+  from {left: -100%;}
+  to {left: 0%;}
+}
+
+.moveFooter{
+
+  position: relative;
+  animation-name: moveNavBar;
+   animation-duration: 3s;
+   animation-fill-mode: forwards;
+}
+
+@keyframes moveFooter {
+  from {left: -100%;}
+  to {left: 0%;}
+}
+
+/* stilos para slide carrusel
+
+.carousel-caption {
+  background-color: transparent;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+}
+
+.carousel-caption h3 {
+  font-size: 36px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.carousel-caption p {
+  font-size: 24px;
+  color: #fff;
+}
+*/
+
+.carousel-item, .carousel-item img  {
+  max-height: 70vh;
+  max-width: 70vh;
+  display: block;
+  margin: 0 auto;
+
+}
+
+
+/*metodos de pago*/
+
+.payment-method {
+  background-color: #f8f8f8;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+.payment-methods {
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-methods h3 {
+  margin-right: 20px;
+}
+
+.payment-methods ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.payment-methods li {
+  margin-right: 10px;
+}
+
