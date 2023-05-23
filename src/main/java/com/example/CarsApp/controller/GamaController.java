@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  *
@@ -45,45 +47,46 @@ public class GamaController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<Gama> agregar(@RequestBody Gama gama) {
-        Gama newCar = gamaservice.save(gama);
-        return new ResponseEntity<>(newCar, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Gama agregar(@RequestBody Gama gama) {
+        return gamaservice.save(gama);
     }
 
-    //Petición PUT para actualizar
+    // Petición PUT para actualizar
     @PutMapping(value = "/update")
-
-    public ResponseEntity<Gama> actualizar(@RequestBody Gama gama) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Gama actualizar(@RequestBody Gama gama) {
         // Obtener el ID del objeto Gama del JSON
         Integer id = gama.getIdGama();
 
         // Buscar la gama por su ID
-        Gama newGama = gamaservice.findById(id);
-        if (newGama != null) {
+        Gama existingGama = gamaservice.findById(id);
+        if (existingGama != null) {
             // Actualizar los campos de gama con los datos del Request
-            newGama.setName(gama.getName());
-            newGama.setDescription(gama.getDescription());
+            existingGama.setName(gama.getName());
+            existingGama.setDescription(gama.getDescription());
 
-            Gama updatedGama = gamaservice.save(newGama);
+            Gama updatedGama = gamaservice.save(existingGama);
 
-            return new ResponseEntity<>(updatedGama, HttpStatus.OK);
+            return updatedGama;
         } else {
             // No lo encontró
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-
+     // Petición DELETE para eliminar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Integer id) {
         // Buscar la gama por su ID
         Gama gama = gamaservice.findById(id);
         if (gama != null) {
             // Eliminar gama
             gamaservice.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             // No se encontró gama
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+
 }

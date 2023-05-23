@@ -9,7 +9,6 @@ import com.example.CarsApp.service.ClientService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 /**
  *
@@ -41,15 +42,15 @@ public class ClientController {
 
     //Peticiones POST
     @PostMapping(value = "/save")
-    public ResponseEntity<Client> agregar(@RequestBody Client cliente) {
-        Client newClient = clientservice.save(cliente);
-        return new ResponseEntity<>(newClient, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client agregar(@RequestBody Client cliente) {
+        return clientservice.save(cliente);
     }
 
     //Petición PUT para actualizar
     @PutMapping(value = "/update")
-
-    public ResponseEntity<Client> actualizar(@RequestBody Client client) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client actualizar(@RequestBody Client client) {
         // Obtener el ID del objeto Client del JSON
         Integer id = client.getIdClient();
 
@@ -64,24 +65,25 @@ public class ClientController {
 
             Client updatedClient = clientservice.save(newClient);
 
-            return new ResponseEntity<>(updatedClient, HttpStatus.OK);
+            return updatedClient;
         } else {
             // No lo encontró
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-
+    
+    // Petición DELETE para eliminar
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Integer id) {
         // Buscar la gama por su ID
         Client client = clientservice.findById(id);
         if (client != null) {
             // Eliminar gama
             clientservice.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
         } else {
             // No se encontró gama
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 }
