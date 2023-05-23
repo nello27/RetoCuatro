@@ -22,7 +22,7 @@ function traerDatosCarros(){
 
 
     $.ajax({
-        url:"http://localhost:8080/appCars/Car/all",
+        url:"http://localhost:8080/CarsApp/Car/all",
         type: "GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -46,7 +46,7 @@ function pintarDatos(items){
     htmlParaIsertar += "<tbody>";
     for(i=0; i<items.length;i++){
         htmlParaIsertar+="<tr>";
-        htmlParaIsertar+="<td>"+items[i].id+"</td>";
+        htmlParaIsertar+="<td>"+items[i].idCar+"</td>";
         htmlParaIsertar+="<td>"+items[i].name+"</td>";
         htmlParaIsertar+="<td>"+items[i].brand+"</td>";
         htmlParaIsertar+="<td>"+items[i].year+"</td>";
@@ -67,7 +67,7 @@ function pintarDatos(items){
 function GuardarDatos(){
 
         let myData= {
-        "id": $("#id").val(),
+        "idCar": $("#idCar").val(),
         "name": $("#name").val(),
         "brand": $("#brand").val(),
         "year": $("#year").val(),
@@ -77,7 +77,7 @@ function GuardarDatos(){
         //let dataToSend=JSON.stringify(myData);
         console.log(myData);
     $.ajax({
-        url:"http://localhost:8080/appCars/Car/save",
+        url:"http://localhost:8080/CarsApp/Car/save",
             type:"POST",
             contentType: 'application/json',
             data:JSON.stringify(myData),
@@ -98,5 +98,38 @@ function GuardarDatos(){
     });
 
 
+}
+
+function ActualizarInformacion(idelemento){
+    let myData={
+
+        idcliente:$("#idcliente").val(),
+        nombre:$("#nombre").val(),
+        direccion:$("#direccion").val(),
+        correo:$("#correo").val()
+
+    };
+
+    let dataToSend=JSON.stringify(myData);
+
+    alert(dataToSend);
+    let miurl= "http://localhost:8080/demoweb1/cliente/"+myData.idcliente;
+    alert (miurl);
+    $.ajax({
+        url:"http://localhost:8080/demoweb1/cliente/"+myData.idclient,
+        type:"PUT",
+        data:dataToSend,
+        contentType:"application/JSON",
+        datatype:"JSON",
+        success:function(respuesta){
+            $("#idcliente").empty();
+            $("#nombre").val("");
+            $("#direccion").val("");
+            $("#correo").val("");
+            traerInformacion();
+            alert("Se he Actualizado")
+        }
+
+    });
 }
 
