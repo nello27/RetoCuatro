@@ -43,7 +43,7 @@
         <input type="text" id="name" placeholder="Nombre"><br><br>
         <input type="email" id="email" placeholder="Email"><br><br>
         <input type="number" id="age" placeholder="Edad"><br><br>
-
+        <select id="gama" placeholder="Gama"></select><br><br>
     </div>
 
     <button onclick="GuardarDatos()">Guardar</button>
@@ -52,3 +52,24 @@
 </body>
 
 </html>
+
+<script>
+
+$(document).ready(function() {
+    $.ajax({
+        url: "http://localhost:8080/CarsApp/api/Gama/all",
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+            // Manejar la respuesta exitosa y actualizar el campo de selección
+            var select = $("#gama");
+            $.each(response, function(index, gama) {
+                select.append('<option value="' + gama.idGama + '">' + gama.idGama + '</option>');
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});
+</script>
