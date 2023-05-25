@@ -1,28 +1,8 @@
-/*function traerDatosCarros(){
-
-    $.ajax({
-
-        url: 'https://g127742c93d7e5c-r09bclxntcqiu4s0.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/car/car',
-        type: 'GET',
-        datatype: 'json',
-        succes: function(respuesta){
-
-            pintarDatos(respuesta.items);
-
-        },
-        error: function(respuesta, xhr){
-
-            alert("Error peticion")
-        }
-    });
-    
-}*/
-
-function traerDatosCarros(){
+function traerDatosCarroscarros(){
 
 
     $.ajax({
-        url:"http://localhost:8080/CarsApp/Car/all",
+        url:"http://localhost:8080/CarsApp/api/Car/all",
         type: "GET",
         datatype:"JSON",
         success:function(respuesta){
@@ -51,7 +31,7 @@ function pintarDatos(items){
         htmlParaIsertar+="<td>"+items[i].brand+"</td>";
         htmlParaIsertar+="<td>"+items[i].year+"</td>";
         htmlParaIsertar+="<td>"+items[i].description+"</td>";
-        htmlParaIsertar+="<td>"+items[i].gama+"</td>";
+        htmlParaIsertar+= "<td>" + items[i].gama.name + "</td>";
         htmlParaIsertar+="</tr>";
 
     }
@@ -64,43 +44,37 @@ function pintarDatos(items){
 }
 
 
-function GuardarDatos(){
-
-        let myData= {
+function GuardarDatoscarros() {
+    
+    //let selectedGamaId = $("#gama").val();
+    let selectedGamaId = $("#gama").val();
+    let myData = {
         "idCar": $("#idCar").val(),
         "name": $("#name").val(),
         "brand": $("#brand").val(),
         "year": $("#year").val(),
         "description": $("#description").val(),
-        "gama": $("#gama").val()
-        };
-        //let dataToSend=JSON.stringify(myData);
-        console.log(myData);
+        "gama": { "idGama": selectedGamaId }
+    };
+    console.log(myData);
+    alert(myData);
     $.ajax({
-        url:"http://localhost:8080/CarsApp/Car/save",
-            type:"POST",
-            contentType: 'application/json',
-            data:JSON.stringify(myData),
-        success:function(respuesta){
-            $("#id").val(""),
-            $("#brand").val(""),
-            $("#model").val(""),
-            $("#category_id").val(""),
-            traerInformacion();
-            alert("Se he guardado")
+        url: "http://localhost:8080/CarsApp/api/Car/save",
+        type: "POST",
+        contentType: 'application/json',
+        data: JSON.stringify(myData),
+        success: function(respuesta) {
+            alert("Se ha guardado el carro exitosamente");
         },
-        
-        error:function(error){
-            
-            console.log("Error"+$(error))
+        error: function(error) {
+            console.log("Error: " + error);
         }
-
     });
-
-
 }
 
-function ActualizarInformacion(idelemento){
+
+
+function ActualizarInformacioncarros(idelemento){
     let myData={
 
         idcliente:$("#idcliente").val(),
@@ -112,11 +86,11 @@ function ActualizarInformacion(idelemento){
 
     let dataToSend=JSON.stringify(myData);
 
-    alert(dataToSend);
-    let miurl= "http://localhost:8080/demoweb1/cliente/"+myData.idcliente;
-    alert (miurl);
+    //alert(dataToSend);
+    //let miurl= "http://localhost:8080/demoweb1/cliente/"+myData.idcliente;
+    //alert (miurl);
     $.ajax({
-        url:"http://localhost:8080/demoweb1/cliente/"+myData.idclient,
+        url:"http://localhost:8080/api/CarsApp/"+myData.idclient,
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",

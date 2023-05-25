@@ -13,15 +13,14 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/carros.js"></script>
-    <script type="text/javascript" src="js/funcionesGenerales.js"></script>
     <link rel="stylesheet" href="css/estilosQuaj.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
-    <title>Carros1</title>
+    <title>Carros</title>
 </head>
 
-<body onload="traerDatosCarros()">
+<body onload="traerDatosCarroscarros()">
 
     <h1>Carros1</h1>
 
@@ -45,9 +44,9 @@
         <input type="text" id="brand" placeholder="brand"><br><br>
         <input type="number" id="year" placeholder="year"><br><br>
         <input type="text" id="description" placeholder="description"><br><br>
-        <input type="number" id="gama" placeholder="gama"><br><br>
-        <button onclick="GuardarDatos()">Guardar</button>\
-        <button onclick="ActualizarInformacion()">Actualizar</button>
+        <select id="gama" placeholder="gama"></select><br><br>
+        <button onclick="GuardarDatoscarros()">Guardar</button>
+        <button onclick="ActualizarInformacioncarros()">Actualizar</button>
         <button onclick="location.href='index.html'">Volver</button>
     </div>
 
@@ -56,3 +55,22 @@
 </body>
 
 </html>
+
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: "http://localhost:8080/CarsApp/api/Gama/all",
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+            var select = $("#gama");
+            $.each(response, function(index, gama) {
+                select.append('<option value="' + gama.idGama + '">' + gama.idGama +"  "+ gama.name +"  "+ gama.description+ '</option>');
+            });
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+});
+</script>
