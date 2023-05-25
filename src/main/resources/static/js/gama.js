@@ -1,23 +1,3 @@
-/*function traerDatosCarros(){
-
-    $.ajax({
-
-        url: 'https://g127742c93d7e5c-r09bclxntcqiu4s0.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/car/car',
-        type: 'GET',
-        datatype: 'json',
-        succes: function(respuesta){
-
-            pintarDatos(respuesta.items);
-
-        },
-        error: function(respuesta, xhr){
-
-            alert("Error peticion")
-        }
-    });
-    
-}*/
-
 function traerDatosGama(){
 
 
@@ -41,14 +21,15 @@ function traerDatosGama(){
 function pintarDatos(items){
     console.log(items);
     let htmlParaInsertar = "";
-    htmlParaInsertar += "<thead><tr><th>Carros</th><th>Acciones</th></tr></thead>";
+    htmlParaInsertar += "<thead class='thead-dark'><tr><th>Carros</th><th>Acciones</th></tr></thead>";
     htmlParaInsertar += "<tbody>";
     for(i = 0; i < items.length; i++){
         htmlParaInsertar += "<tr>";
-        htmlParaInsertar += "<td class='idGama' style='display: none;'>" + items[i].idGama + "</td>";
-        htmlParaInsertar += "<td>" + items[i].name + "</td>";
-        htmlParaInsertar += "<td>" + items[i].description + "</td>";
+        htmlParaInsertar += "<td class='idGama' style='display: none;' id='idGamas'>" + items[i].idGama + "</td>";
+        htmlParaInsertar += "<td><input type='text' class='form-control' id='names' value='" + items[i].name + "'></td>";
+        htmlParaInsertar += "<td><input type='text' class='form-control' id='descriptions' value='"+items[i].description + "'></td>";
         htmlParaInsertar += "<td><button class='btn btn-danger btn-sm btnEliminar' data-id='" + items[i].idGama + "'>Eliminar</button></td>";
+        htmlParaInsertar += "<td><button class='btn btn-success btn-sm btnActualizar' data-id='" + items[i].idGama + "'>Modificar</button></td>";
         htmlParaInsertar += "</tr>";
     }
     htmlParaInsertar += "</tbody>";
@@ -61,6 +42,15 @@ function pintarDatos(items){
         var idGama = $(this).data("id");
         borrar(idGama);
     });
+    
+    // Agregar evento de click al botón de actualizar
+    $(".btnActualizar").on("click", function() {
+    var idGama = $(this).data("id");
+    var name = $(this).closest("tr").find("#names").val();
+    var description = $(this).closest("tr").find("#descriptions").val();
+    ActualizarInformaciongama(idGama, name, description);
+    });
+
 }
 
 function GuardarDatos(){
@@ -95,11 +85,11 @@ function GuardarDatos(){
 
 }
 
-function ActualizarInformaciongama() {
+function ActualizarInformaciongama(idGama,name,description) {
     
-    let idGama = $("#idGama").val();
-    let name = $("#name").val();
-    let description = $("#description").val();
+    //let idGama = $("#idGama").val();
+    //let name = $("#name").val();
+    //let description = $("#description").val();
 
     let myData = {
         idGama: idGama,

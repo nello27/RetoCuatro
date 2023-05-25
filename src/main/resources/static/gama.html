@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    table, th, td{
-
-        border:1px solid black;
+    table, th, td {
+        border: 1px solid black;
     }
 </style>
 <head>
@@ -22,32 +21,31 @@
 
 <body onload="traerDatosGama()">
 
-    <h1>Gama</h1>
+    <div class="container">
+        <h1 class="text-center">Gama</h1>
 
-    <div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped text-center">
+                <tbody id="tabla"></tbody>
+            </table>
+        </div>
 
-        <table id="tabla">
-
-
-        </table>
-
-
+        <form>
+            <div class="mt-4">
+                <h3>Agregar Gama</h3>
+                <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="description" placeholder="Description">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="GuardarDatos()">Guardar</button>
+                <button type="button" class="btn btn-success" onclick="ActualizarInformaciongama()">Actualizar</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href='CarsApp/index.html'">Volver</button>
+            </div>
+        </form>
     </div>
 
-    <form>
-    
-
-    <div>
-        <h3>Agregar Gama</h3>
-        <input type="text" id="name" placeholder="name"><br><br>
-        <input type="text" id="description" placeholder="description"><br><br>
-        <button onclick="GuardarDatos()">Guardar</button>
-        <button onclick="ActualizarInformaciongama()">Actualizar</button>
-        <button onclick="location.href='CarsApp/index.html'">Volver</button>
-    </div>
-
-
-     </form>
 </body>
 
 </html>
