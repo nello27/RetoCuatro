@@ -39,27 +39,29 @@ function traerDatosGama(){
 }
 
 function pintarDatos(items){
-
     console.log(items);
-    let htmlParaIsertar = "";
-    htmlParaIsertar += "<thead><tr><th>Carros</th></tr></thead>";
-    htmlParaIsertar += "<tbody>";
-    for(i=0; i<items.length;i++){
-        htmlParaIsertar+="<tr>";
-        htmlParaIsertar+="<td>"+items[i].idGama+"</td>";
-        htmlParaIsertar+="<td>"+items[i].name+"</td>";
-        htmlParaIsertar+="<td>"+items[i].description+"</td>";
-        htmlParaIsertar+="</tr>";
-
+    let htmlParaInsertar = "";
+    htmlParaInsertar += "<thead><tr><th>Carros</th><th>Acciones</th></tr></thead>";
+    htmlParaInsertar += "<tbody>";
+    for(i = 0; i < items.length; i++){
+        htmlParaInsertar += "<tr>";
+        htmlParaInsertar += "<td class='idGama' style='display: none;'>" + items[i].idGama + "</td>";
+        htmlParaInsertar += "<td>" + items[i].name + "</td>";
+        htmlParaInsertar += "<td>" + items[i].description + "</td>";
+        htmlParaInsertar += "<td><button class='btn btn-danger btn-sm btnEliminar' data-id='" + items[i].idGama + "'>Eliminar</button></td>";
+        htmlParaInsertar += "</tr>";
     }
-    htmlParaIsertar += "</tbody>";
+    htmlParaInsertar += "</tbody>";
 
     $("#tabla").empty();
-    $("#tabla").append(htmlParaIsertar);
+    $("#tabla").append(htmlParaInsertar);
 
-
+    // Agregar evento de click al botón de eliminar
+    $(".btnEliminar").on("click", function(){
+        var idGama = $(this).data("id");
+        borrar(idGama);
+    });
 }
-
 
 function GuardarDatos(){
 
@@ -127,9 +129,9 @@ function ActualizarInformaciongama() {
     });
 }
     
-function borrar() {
+function borrar(idGama) {
     
-    let idGama = $("#idGama").val();
+    //let idGama = $("#idGama").val();
     
     $.ajax({
         url: "http://localhost:8080/CarsApp/api/Gama/" + idGama,
