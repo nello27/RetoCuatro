@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<style>
-    table, th, td{
 
-        border:1px solid black;
-    }
-</style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +8,7 @@
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/carros.js"></script>
-    <link rel="stylesheet" href="css/estilosQuaj.css">
+    <!--<link rel="stylesheet" href="css/estilosQuaj.css">-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
@@ -22,39 +17,47 @@
 
 <body onload="traerDatosCarroscarros()">
 
-    <h1>Carros1</h1>
+    <h1 class="text-center mt-4">Carros</h1>
 
-    <div>
-
-        <table id="tabla">
-
+    <div class="container">
+        <table id="tabla" class="table table-bordered mt-4">
 
         </table>
-
-
     </div>
 
     <form>
-    
-
-    <div>
-        <h3>Agregar Carro</h3>
-        <input type="number" id="idCar" placeholder="Id carro"><br><br>
-        <input type="text" id="name" placeholder="name"><br><br>
-        <input type="text" id="brand" placeholder="brand"><br><br>
-        <input type="number" id="year" placeholder="year"><br><br>
-        <input type="text" id="description" placeholder="description"><br><br>
-        <select id="gama" placeholder="gama"></select><br><br>
-        <button onclick="GuardarDatoscarros()">Guardar</button>
-        <button onclick="ActualizarInformacioncarros()">Actualizar</button>
-        <button onclick="location.href='index.html'">Volver</button>
-    </div>
-
-
-     </form>
+        <div class="container">
+            <h3 class="mt-4">Agregar Carro</h3>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" id="brand" placeholder="Brand">
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" class="form-control" id="year" placeholder="Year">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" placeholder="Description">
+            </div>
+            <div class="form-group">
+                <label for="gama">Gama</label>
+                <select id="gama" class="form-control">
+                </select>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="GuardarDatoscarros()">Guardar</button>
+            <button type="button" class="btn btn-primary" onclick="ActualizarInformacioncarros()">Actualizar</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='index.html'">Volver</button>
+        </div>
+    </form>
 </body>
 
 </html>
+
 
 <script>
 $(document).ready(function() {

@@ -39,6 +39,11 @@ public class ReservationController {
     public List<Reservation> consultartodos() {
         return Reservationservice.findAll();
     }
+    
+    @GetMapping(value = "/2020") //se agrega al endpoint
+    public List<Reservation> consultarporfechas() {
+        return Reservationservice.findAll();
+    }
 
     @GetMapping(value = "/all/id/{id}")
     public Reservation consultarporId(@PathVariable Integer id) {

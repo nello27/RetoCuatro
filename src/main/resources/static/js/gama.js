@@ -21,7 +21,7 @@ function traerDatosGama(){
 function pintarDatos(items){
     console.log(items);
     let htmlParaInsertar = "";
-    htmlParaInsertar += "<thead class='thead-dark'><tr><th>Carros</th><th>Acciones</th></tr></thead>";
+    htmlParaInsertar += "<thead class='thead-dark'><tr><th>Nombre</th><th>Descripción</th><th>Anular</th><th>Editar</th></tr></thead>";
     htmlParaInsertar += "<tbody>";
     for(i = 0; i < items.length; i++){
         htmlParaInsertar += "<tr>";
