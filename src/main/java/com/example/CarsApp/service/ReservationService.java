@@ -4,6 +4,8 @@
  */
 package com.example.CarsApp.service;
 
+import com.example.CarsApp.model.DTOs.CompletedAndCancelled;
+import com.example.CarsApp.model.DTOs.TotalAndClient;
 import com.example.CarsApp.model.Reservation;
 import java.util.List;
 
@@ -20,4 +22,11 @@ public interface ReservationService {
     public Reservation findById(Integer id);
 
     public List<Reservation> findAll();
+    
+    public List<Reservation> getReservationBetweenDatesReport(String fechaA, String fechaB);
+    
+    public CompletedAndCancelled getReservationStatusReport();
+    
+    public List<TotalAndClient> getTopClientsReport();
+    
 }

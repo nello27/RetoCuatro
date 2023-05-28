@@ -4,6 +4,8 @@
  */
 package com.example.CarsApp.controller;
 
+import com.example.CarsApp.model.DTOs.CompletedAndCancelled;
+import com.example.CarsApp.model.DTOs.TotalAndClient;
 import com.example.CarsApp.model.Reservation;
 import com.example.CarsApp.service.ReservationService;
 import java.util.List;
@@ -40,15 +42,29 @@ public class ReservationController {
         return Reservationservice.findAll();
     }
     
-    @GetMapping(value = "/2020") //se agrega al endpoint
-    public List<Reservation> consultarporfechas() {
-        return Reservationservice.findAll();
+    @GetMapping(value = "/report-dates/{fecha1}/{fecha2}") //se agrega al endpoint
+    public List<Reservation> getReservationBetweenDatesReport(@PathVariable("fecha1")String fecha1, @PathVariable("fecha2")String fecha2) {
+        return Reservationservice.getReservationBetweenDatesReport(fecha1, fecha2);
     }
+    
+    @GetMapping(value = "/report-status") //se agrega al endpoint
+    public CompletedAndCancelled getReservationStatusReport(){
+    
+        return Reservationservice.getReservationStatusReport();
+    }
+    
+    @GetMapping(value = "/report-clients") //se agrega al endpoint
+    public List<TotalAndClient> getTopClientsReport(){
+    
+        return Reservationservice.getTopClientsReport();
+    }
+
 
     @GetMapping(value = "/all/id/{id}")
     public Reservation consultarporId(@PathVariable Integer id) {
         return Reservationservice.findById(id);
     }
+    
 
     //Peticiones POST
     @PostMapping(value = "/save")
@@ -72,5 +88,8 @@ public class ReservationController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
+    
+    //Reto5
+    
     
 }
