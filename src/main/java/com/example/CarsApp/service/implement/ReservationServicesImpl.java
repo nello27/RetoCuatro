@@ -7,6 +7,7 @@ package com.example.CarsApp.service.implement;
 import com.example.CarsApp.dao.ReservationDao;
 import com.example.CarsApp.model.Reservation;
 import com.example.CarsApp.service.ReservationService;
+import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,22 @@ public class ReservationServicesImpl implements ReservationService{
         return (List<Reservation>) reservationdao.findAll();
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
+    
+    // RETO 5
+    public List<Reservation> getReservationBetweenDates(Date fechaA, Date fechaB){
+        
+        return reservationdao.findAllByStartDateAfterAndDevolutionDateBefore(fechaA, fechaB);
+    
+    }
+    
+    public List<Reservation> getReservationByStatus(String status){
+        
+        return reservationdao.findAllByStatus(status);
+    }
+    
+    public void getTopClients(){
+    
+        
+    }
+    
 }

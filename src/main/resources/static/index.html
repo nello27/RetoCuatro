@@ -7,14 +7,24 @@
     <link rel="stylesheet" href="css/estilosQuaj.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/> 
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script> 
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script> 
+    <title>CarsApp</title>
 </head>
-<body>
 
+<body>
+    
     <h1>
         Reto4
     </h1>
+    <div class="container authenticated">
+        Para iniciar sesión haz click: <a href="/oauth2/authorization/github">aquí</a>
+    </div> 
+    <div class="container authenticated" style="display: none">
+        Has sido autenticado: <span id="usuario"></span> 
+        <button onclick="location.href= 'index.html';">Continuar</button>
+    </div> 
 
     <ul>
         <li>
@@ -30,6 +40,14 @@
             <a href="mensajes.html">Ver Mensajes</a>
         </li>
     </ul>
-    
+
 </body>
+<script type="text/javascript">
+    $.get("/user", function (data) {
+        $("#usuario").html(data.name);
+        $(".unauthenticated").hide();
+        $(".authenticated").show();
+    });
+</script>
 </html>
+

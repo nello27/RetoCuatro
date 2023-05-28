@@ -82,6 +82,7 @@ function GuardarDatoscarros() {
         contentType: 'application/json',
         data: JSON.stringify(myData),
         success: function(respuesta) {
+            traerDatosCarroscarros();
             alert("Se ha guardado el carro exitosamente");
         },
         error: function(error) {
@@ -91,43 +92,36 @@ function GuardarDatoscarros() {
 }
 
 
-
-function ActualizarInformacioncarros(idCar, name, brand, year, description ){
-    let myData={
-
-        idCar:idCar,
-        name:name,
-        brand:brand,
-        year:year,
-        description:description
-
+function ActualizarInformacioncarros(idCar, name, brand, year, description) {
+    let myData = {
+        idCar: idCar,
+        name: name,
+        brand: brand,
+        year: year,
+        description: description
     };
 
-    let dataToSend=JSON.stringify(myData);
+    let dataToSend = JSON.stringify(myData);
 
-    //alert(dataToSend);
-    //let miurl= "http://localhost:8080/demoweb1/cliente/"+myData.idcliente;
-    //alert (miurl);
     $.ajax({
-        url:"http://localhost:8080/CarsApp/api/Car/update",
-        type:"PUT",
-        data:dataToSend,
-        contentType:"application/JSON",
-        datatype:"JSON",
-        success:function(respuesta){
+        url: "http://localhost:8080/CarsApp/api/Car/update",
+        type: "PUT",
+        data: dataToSend,
+        contentType: "application/json",
+        dataType: "json",
+        success: function(respuesta) {
             $("#idCar").empty();
             $("#name").val("");
             $("#brand").val("");
             $("#year").val("");
             $("#description").val("");
             traerDatosCarroscarros();
-            alert("Se he Actualizado");
+            alert("Se ha actualizado la información correctamente.");
         },
         error: function(error) {
             console.log(error);
-            alert("Error al actualizar la información");
+            alert("Error al actualizar la información.");
         }
-
     });
 }
 
