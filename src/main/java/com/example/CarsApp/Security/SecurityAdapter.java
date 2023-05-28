@@ -14,12 +14,16 @@ public class SecurityAdapter extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests(
-                a -> a.antMatchers("/**", "/error", "/webjars/**", "/api/**").permitAll().anyRequest().authenticated()
-        ).exceptionHandling(
+                a -> a.antMatchers("/**", "/error", "/webjars/**", "/api/**","/h2-console/**").permitAll().anyRequest().authenticated()
+        ).headers().frameOptions().sameOrigin() // Permitir la carga del iframe de H2 en la misma página
+                .and()
+                .csrf().disable()
+        .exceptionHandling(
                 e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.FORBIDDEN))
         ).oauth2Login().defaultSuccessUrl("/", true);
 
         http.cors().and().csrf().disable();
+        
     }
 
 }
